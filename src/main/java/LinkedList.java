@@ -19,12 +19,15 @@ public class LinkedList<E> implements Lista {
 
     @Override
     public Object get(int index) throws NullPointerException{
-        Node actual = this.firstNode;
-        for(int i = 0 ; i < index ; i++) {
-            actual = actual.getNext();
 
-        }
-        return actual.getValue();
+        if(!isEmpty()) {
+            Node actual = this.firstNode;
+            for (int i = 0; i < index; i++) {
+                actual = actual.getNext();
+
+            }
+            return actual.getValue();
+        }else return null;
     }
 
     @Override
@@ -46,26 +49,27 @@ public class LinkedList<E> implements Lista {
 
     @Override
     public void remove(Object elem) {
-        Node actual = this.firstNode;
-        for (int i = 0; i < size() ; i++) {
-            if(actual.getValue().equals(elem)) {
-                if(actual.equals(this.firstNode)) {
-                    this.firstNode = actual.getNext();
-                }else if(actual.equals(this.lastNode)) {
-                    this.lastNode = actual.getPrevious();
-                }else{
-                    actual.getNext().setPrevious(actual.getPrevious());
-                    actual.getPrevious().setNext(actual.getNext());
+        if(!isEmpty()) {
+            Node actual = this.firstNode;
+            for (int i = 0; i < size(); i++) {
+                if (actual.getValue().equals(elem)) {
+                    if (actual.equals(this.firstNode)) {
+                        this.firstNode = actual.getNext();
+                    } else if (actual.equals(this.lastNode)) {
+                        this.lastNode = actual.getPrevious();
+                    } else {
+                        actual.getNext().setPrevious(actual.getPrevious());
+                        actual.getPrevious().setNext(actual.getNext());
+                    }
                 }
+                actual = actual.getNext();
             }
-            actual = actual.getNext();
         }
-
     }
 
     @Override
     public boolean isEmpty() {
-        return firstNode.equals(null);
+        return firstNode == null;
     }
 
     @Override
@@ -87,16 +91,20 @@ public class LinkedList<E> implements Lista {
 
     @Override
     public boolean isSorted(Comparator comparator) {
-        return false;
+        for (int i = 0; i < size()-1; i++) {
+            if(comparator.compare(get(i),get(i+1)) != 1) return false;
+        }
+        return true;
     }
 
     @Override
     public boolean exist(Object elem) {
-        Node actual = this.firstNode;
         if (!isEmpty()) {
+        Node actual = this.firstNode;
             do {
+                if (actual.getValue().equals(elem)) return true;
                 actual = actual.getNext();
-                if (actual.equals(elem)) return true;
+
             } while (!actual.equals(this.lastNode));
         }
             return false;

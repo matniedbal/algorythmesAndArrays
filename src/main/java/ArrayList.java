@@ -15,7 +15,8 @@ public class ArrayList<E> implements Lista {
 
     @Override
     public Object get(int index) {
-        return array[index];
+        if(!isEmpty()) return array[index];
+        else return null;
     }
 
     @Override
@@ -30,20 +31,24 @@ public class ArrayList<E> implements Lista {
 
     @Override
     public void remove(Object elem) {
-        E[] tempArr = (E[]) new Object[array.length-1];
-        boolean isPassed = false;
-        if(exist(elem)){
-            array[getIndex(elem)] = null;
-            for (int i = 0; i < this.array.length; i++) {
-                if(!isPassed && !this.array[i].equals(null)) tempArr[i] = this.array[i];
-                else if(!isPassed && this.array[i].equals(null)) {isPassed = true; tempArr[i] = this.array[i+1];}
-                else if(isPassed && !this.array[i].equals(null)) tempArr[i] = this.array[i+1];
-            }
-             this.array = tempArr;
-        }else{
-            System.out.println("Unable to find the Object");
-        }
+        if(!isEmpty()) {
 
+            E[] tempArr = (E[]) new Object[array.length - 1];
+            boolean isPassed = false;
+            if (exist(elem)) {
+                array[getIndex(elem)] = null;
+                for (int i = 0; i < tempArr.length; i++) {
+                    if (!isPassed && this.array[i] != (null)) tempArr[i] = this.array[i];
+                    else if (!isPassed && this.array[i] == (null)) {
+                        isPassed = true;
+                        tempArr[i] = this.array[i + 1];
+                    } else if (isPassed && this.array[i] != (null)) tempArr[i] = this.array[i + 1];
+                }
+                this.array = tempArr;
+            } else {
+                System.out.println("Unable to find the Object");
+            }
+        }
     }
 
     @Override
@@ -58,7 +63,10 @@ public class ArrayList<E> implements Lista {
 
     @Override
     public boolean isSorted(Comparator comparator) {
-        return false;
+        for (int i = 0; i < this.array.length-1; i++) {
+            if(comparator.compare(array[i],array[i+1]) != 1) return false;
+        }
+        return true;
     }
 
     @Override
