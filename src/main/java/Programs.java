@@ -159,5 +159,24 @@ public class Programs {
         System.out.println(factorial.getStock().toString()+" factorial is "+ factorial.result());
     }
 
+    public static void queueCheck(int number){
+        Queue<Integer> queue = new Queue<>();
+        for (int i = 0; i < number; i++) {
+            queue.add(i);
+        }
+
+        System.out.println(queue.toString(true));
+//        System.out.println(queue.getNodeByIndex(4).getValue());
+        queue.remove(0);
+        System.out.println(queue.toString(true));
+//        queue.quit(9);
+//        System.out.println(queue.toString(true));
+    }
+
+
+    public static void shop(int numberOfClients){
+        Shop shop = new Shop(numberOfClients);
+    }
+
 
 }

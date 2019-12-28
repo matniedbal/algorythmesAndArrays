@@ -15,8 +15,9 @@ public class Main {
 //        Programs.linkedListCheck(numberOfElements,quotient,idOfValueToFind,elementToRemove,exist);
 //        Programs.stock(numberOfElements);
 //        Programs.reversedPolishNotation("12 2 3 4 * 10 5 / + * +");
-          Programs.factorial(numberOfElements);
-
+//          Programs.factorial(numberOfElements);
+//        Programs.queueCheck(10);
+        Programs.shop(20);
     }
 
 }
