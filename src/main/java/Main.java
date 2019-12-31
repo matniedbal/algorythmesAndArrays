@@ -17,7 +17,11 @@ public class Main {
 //        Programs.reversedPolishNotation("12 2 3 4 * 10 5 / + * +");
 //          Programs.factorial(numberOfElements);
 //        Programs.queueCheck(10);
-        Programs.shop(20);
+//        Programs.shop(2000);
+
+        Programs.sorting();
+
+
     }
 
 }

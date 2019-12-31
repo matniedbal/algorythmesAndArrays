@@ -1,3 +1,8 @@
+import org.apache.commons.lang3.RandomStringUtils;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public class Programs {
 
 
@@ -41,7 +46,7 @@ public class Programs {
         long endTime;
         long linkedlistTime;
         System.out.println("\n\n***LINKED_LIST***");
-        Lista<Integer> lista2 = new LinkedList<>();
+        Lista<Integer> lista2 = (Lista<Integer>) new LinkedList<Integer>();
 
         startTime = System.nanoTime();
         for(int i = 1 ; i < numberOfElements; i++) lista2.add(i*quotient);
@@ -176,6 +181,29 @@ public class Programs {
 
     public static void shop(int numberOfClients){
         Shop shop = new Shop(numberOfClients);
+    }
+
+    public static void sorting(){
+        int listLength = 90;
+        List<Integer> listIntToSort = new LinkedList<>();
+        List<String> listStringToSort = new LinkedList<>();
+
+        Sorting sort = new Sorting();
+        for(int i = 0; i < listLength; i++){
+           listIntToSort.add((int) (Math.random()*200));
+        }
+        System.out.println(listIntToSort);
+        sort.sortByChoice(listIntToSort);
+        System.out.println(listIntToSort);
+
+        for(int i = 0; i< listLength; i++){
+            listStringToSort.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
+        }
+        System.out.println(listStringToSort);
+        sort.bubbleSortString(listStringToSort);
+        System.out.println(listStringToSort);
+
+
     }
 
 
