@@ -184,16 +184,17 @@ public class Programs {
     }
 
     public static void sorting(){
-        int listLength = 90;
+        int listLength = 2000;
         List<Integer> listIntToSort = new LinkedList<>();
         List<String> listStringToSort = new LinkedList<>();
 
         Sorting sort = new Sorting();
         for(int i = 0; i < listLength; i++){
-           listIntToSort.add((int) (Math.random()*200));
+           listIntToSort.add((int) (Math.random()*listLength));
         }
         System.out.println(listIntToSort);
-        sort.sortByChoice(listIntToSort);
+
+        sort.quickSortInteger(listIntToSort);
         System.out.println(listIntToSort);
 
         for(int i = 0; i< listLength; i++){
