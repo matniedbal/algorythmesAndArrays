@@ -1,10 +1,9 @@
 import org.apache.commons.lang3.RandomStringUtils;
-
+import com.google.gson.Gson;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Programs {
-
 
 
     public static void arrayListCheck(int numberOfElements, int quotient, int idOfValueToFind, int elementToRemove, int exist){
@@ -39,7 +38,6 @@ public class Programs {
         System.out.println(exist+" exist? "+lista.exist(exist));
         System.out.println("IsSorted?: "+lista.isSorted((x,y)->1));
     }
-
 
     public static void linkedListCheck(int numberOfElements, int quotient, int idOfValueToFind, int elementToRemove, int exist){
         long startTime;
@@ -153,7 +151,6 @@ public class Programs {
 
     }
 
-
     public static void reversedPolishNotation(String string){
         ReversedPolishNotation RPN = new ReversedPolishNotation(string);
         System.out.println(RPN.toString());
@@ -178,34 +175,130 @@ public class Programs {
 //        System.out.println(queue.toString(true));
     }
 
-
     public static void shop(int numberOfClients){
         Shop shop = new Shop(numberOfClients);
     }
 
     public static void sorting(){
-        int listLength = 2000;
+
+
+        Gson gson = new Gson();
+
+        int listLength = 1000;
         List<Integer> listIntToSort = new LinkedList<>();
         List<String> listStringToSort = new LinkedList<>();
-
         Sorting sort = new Sorting();
         for(int i = 0; i < listLength; i++){
            listIntToSort.add((int) (Math.random()*listLength));
         }
-        System.out.println(listIntToSort);
-
-        sort.quickSortInteger(listIntToSort);
-        System.out.println(listIntToSort);
-
         for(int i = 0; i< listLength; i++){
             listStringToSort.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
         }
+
+        long startTime , endTime, totalTime;
+
+        System.out.println(listIntToSort);
         System.out.println(listStringToSort);
-        sort.bubbleSortString(listStringToSort);
-        System.out.println(listStringToSort);
+
+        List<Integer> listIntToBubbleSort = listIntToSort;
+        startTime = System.nanoTime();
+        sort.sortInteger(listIntToBubbleSort, Sorting.SortType.bubbleSort);
+        endTime = System.nanoTime();
+        System.out.println("Bubble sort Integer List time: "+(endTime-startTime));
+
+
+        List<String> listStringToBubbleSort = listStringToSort;
+        startTime = System.nanoTime();
+        sort.sortString(listStringToBubbleSort, Sorting.SortType.bubbleSort);
+        endTime = System.nanoTime();
+        System.out.println("Bubble sort String List time: "+(endTime-startTime));
+
+
+        List<Integer> listIntToSelectSort = listIntToSort;
+        startTime = System.nanoTime();
+        sort.sortInteger(listIntToSelectSort, Sorting.SortType.sortBySelect);
+        endTime = System.nanoTime();
+        System.out.println("Sort by select Integer List time: "+(endTime-startTime));
+
+
+        List<String> listStringToSelectSort = listStringToSort;
+        startTime = System.nanoTime();
+        sort.sortString(listStringToSelectSort, Sorting.SortType.sortBySelect);
+        endTime = System.nanoTime();
+        System.out.println("Sort by select String List time: "+(endTime-startTime));
+
+
+        List<Integer> listIntToQuickSort = listIntToSort;
+        startTime = System.nanoTime();
+        sort.sortInteger(listIntToQuickSort, Sorting.SortType.quickSort);
+        endTime = System.nanoTime();
+        System.out.println("Quick sort Integer List time: "+(endTime-startTime));
+
+
+        List<String> listStringToQuickSort = listStringToSort;
+        startTime = System.nanoTime();
+        sort.sortString(listStringToQuickSort, Sorting.SortType.quickSort);
+        endTime = System.nanoTime();
+        System.out.println("Quick sort String list time: "+(endTime-startTime));
+
+
+        List<Integer> listIntToHybridSort1 = listIntToSort;
+        startTime = System.nanoTime();
+        sort.sortInteger(listIntToHybridSort1, Sorting.SortType.hybridSort);
+        endTime = System.nanoTime();
+        System.out.println("Hybrid sort Integer list time: "+(endTime-startTime));
+
+
+        List<String> listStringToHybridSort1 = listStringToSort;
+        startTime = System.nanoTime();
+        sort.sortString(listStringToHybridSort1, Sorting.SortType.hybridSort);
+        endTime = System.nanoTime();
+        System.out.println("Hybrid sort String list time: "+(endTime-startTime));
+
+
+        List<Integer> listIntToHybridSort2 = listIntToSort;
+        startTime = System.nanoTime();
+        sort.sortInteger(listIntToHybridSort2, Sorting.SortType.hybridSort,200);
+        endTime = System.nanoTime();
+        System.out.println("Hybrid sort with larger selection sort Integer list time: "+(endTime-startTime));
+
+
+        List<String> listStringToHybridSort2 = listStringToSort;
+        startTime = System.nanoTime();
+        sort.sortString(listStringToHybridSort2, Sorting.SortType.hybridSort,200);
+        endTime = System.nanoTime();
+        System.out.println("Hybrid sort with larger selection sort String list time: "+(endTime-startTime));
 
 
     }
 
+    public static void sortMe(int numberOfItems){
+        int listLength = numberOfItems;
+        List<Integer> listIntToSort = new LinkedList<>();
+        List<String> listStringToSort = new LinkedList<>();
+        for(int i = 0; i < listLength; i++){
+            listIntToSort.add((int) (Math.random()*listLength));
+        }
+        for(int i = 0; i< listLength; i++){
+            listStringToSort.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
+        }
+
+        Sort hybrid = new HybridSort(250);
+        Sort bubble = new BubbleSort();
+        Sort select = new SortBySelect<>();
+        Sort quick = new QuickSort();
+
+
+        System.out.println(listIntToSort);
+        System.out.println(bubble.sortedIntList(listIntToSort));
+        System.out.println(select.sortedIntList(listIntToSort));
+        System.out.println(quick.sortedIntList(listIntToSort));
+        System.out.println(hybrid.sortedIntList(listIntToSort));
+
+
+
+
+
+    }
 
 }
