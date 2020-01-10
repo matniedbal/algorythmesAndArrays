@@ -218,14 +218,14 @@ public class Programs {
         startTime = System.nanoTime();
         sort.sortInteger(listIntToSelectSort, Sorting.SortType.sortBySelect);
         endTime = System.nanoTime();
-        System.out.println("Sort by select Integer List time: "+(endTime-startTime));
+        System.out.println("Sorting.Sort by select Integer List time: "+(endTime-startTime));
 
 
         List<String> listStringToSelectSort = listStringToSort;
         startTime = System.nanoTime();
         sort.sortString(listStringToSelectSort, Sorting.SortType.sortBySelect);
         endTime = System.nanoTime();
-        System.out.println("Sort by select String List time: "+(endTime-startTime));
+        System.out.println("Sorting.Sort by select String List time: "+(endTime-startTime));
 
 
         List<Integer> listIntToQuickSort = listIntToSort;
@@ -272,33 +272,33 @@ public class Programs {
 
     }
 
-    public static void sortMe(int numberOfItems){
-        int listLength = numberOfItems;
-        List<Integer> listIntToSort = new LinkedList<>();
-        List<String> listStringToSort = new LinkedList<>();
-        for(int i = 0; i < listLength; i++){
-            listIntToSort.add((int) (Math.random()*listLength));
-        }
-        for(int i = 0; i< listLength; i++){
-            listStringToSort.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
-        }
-
-        Sort hybrid = new HybridSort(250);
-        Sort bubble = new BubbleSort();
-        Sort select = new SortBySelect<>();
-        Sort quick = new QuickSort();
-
-
-        System.out.println(listIntToSort);
-        System.out.println(bubble.sortedIntList(listIntToSort));
-        System.out.println(select.sortedIntList(listIntToSort));
-        System.out.println(quick.sortedIntList(listIntToSort));
-        System.out.println(hybrid.sortedIntList(listIntToSort));
-
-
-
-
-
-    }
+//    public static void sortMe(int numberOfItems){
+//        int listLength = numberOfItems;
+//        List<Integer> listIntToSort = new LinkedList<>();
+//        List<String> listStringToSort = new LinkedList<>();
+//        for(int i = 0; i < listLength; i++){
+//            listIntToSort.add((int) (Math.random()*listLength));
+//        }
+//        for(int i = 0; i< listLength; i++){
+//            listStringToSort.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
+//        }
+//
+//        Sort hybrid = new HybridSort(250);
+//        Sort bubble = new BubbleSort();
+//        Sort select = new SortBySelect<>();
+//        Sort quick = new QuickSort();
+//
+//
+//        System.out.println(listIntToSort);
+//        System.out.println(bubble.sortedIntList(listIntToSort));
+//        System.out.println(select.sortedIntList(listIntToSort));
+//        System.out.println(quick.sortedIntList(listIntToSort));
+//        System.out.println(hybrid.sortedIntList(listIntToSort));
+//
+//
+//
+//
+//
+//    }
 
 }

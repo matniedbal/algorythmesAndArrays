@@ -21,7 +21,7 @@ public class Main {
 //        Programs.queueCheck(10);
 //        Programs.shop(2000);
 //        Programs.sorting();
-        Programs.sortMe(2000);
+//        Programs.sortMe(2000);
 
     }
 
