@@ -6,13 +6,12 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
 public class Main {
 
     public static <E> void main(String... agrs){
 
-        int listLength = 20000;
+        int listLength = 10;
+        int numberOfChecks = 10;
         List listToSortInteger = new LinkedList<>();
         List<String> listToSortString = new LinkedList<>();
         for(int i = 0; i < listLength; i++){
@@ -22,24 +21,28 @@ public class Main {
             listToSortString.add(RandomStringUtils.randomAlphabetic((int) ((Math.random()*((12-2)+1))+2)));
         }
 
-        int n = 0;
-        List<Sort> sorts = new LinkedList<>();
-        for(int i = 0 ; i < 300; i += 2){
-            sorts.add(new HybridSort<>(i));
+        List<SortInformationsTest<E>> sortInformationsTestList = new LinkedList<>();
+
+
+        int counter=0;
+        for(int i = 0 ; i < numberOfChecks ; i++){
+            sortInformationsTestList.add(new SortInformationsTest<>(new QuickSort<>(), listToSortInteger, Integer::compareTo));
+            for(int j = 20 ; j < 200; j+=20) {
+                sortInformationsTestList.add(new SortInformationsTest<>(new HybridSort<>(j), listToSortInteger, Integer::compareTo));
+            }
         }
 
-        System.out.println("Unsorted Integer list:\n"+listToSortInteger+"\nUnsorted String list:\n"+listToSortString+"\n");
+        QuickSort quickSort = new QuickSort<SortInformationsTest>();
+        List<SortInformationsTest> sortedList = (List<SortInformationsTest>) quickSort.sorting(sortInformationsTestList, new SortInfoComparator());
 
-        long startT;
-        for(Sort el: sorts){
-            startT = System.nanoTime();
-            el.sorting(listToSortInteger, Integer::compareTo);
-            System.out.println(el.sortType()+"    Working time: "+(System.nanoTime()-startT)/100000);
-//            startT = System.nanoTime();
-//            System.out.println(el.sorting(listToSortString, String::compareTo));
-//            System.out.println(el.sortType()+"    Working time: "+(System.nanoTime()-startT));
+        System.out.println(listToSortInteger);
+        System.out.println(quickSort.sorting(listToSortInteger,new SortInfoComparator()));
+        System.out.println(sortedList.get(0).getDuration()+" "+sortedList.get(sortedList.size()-1).getDuration());
+        System.out.println("The longest sorting of all types of sort was: " + sortInformationsTestList.stream().max(Comparator.comparing(x -> x.getDuration())).get().toString());
+        System.out.println("The shortest sorting time of all types was: " + sortInformationsTestList.stream().min(Comparator.comparing(x -> x.getDuration())).get().toString());
 
-        }
+
+
 
     }
 

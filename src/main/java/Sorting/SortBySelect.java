@@ -1,17 +1,16 @@
 package Sorting;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SortBySelect<E> implements Sort {
+public class SortBySelect<E> implements Sort<E> {
 
     boolean isNumeric = false;
+    private SortType sortType = SortType.SelectSort;
 
     @Override
-    public List sorting(List toSort, Comparator comparator) {
+    public <E> List<E> sorting(List<E> toSort, Comparator<E> comparator) {
         if(toSort.get(0) instanceof Integer) this.isNumeric = true; else this.isNumeric = false;
         List<E> list = new LinkedList<>();
         for(Object el: toSort) list.add((E) el);
@@ -30,6 +29,11 @@ public class SortBySelect<E> implements Sort {
     public String sortType() {
         if(isNumeric) return "Sort by select, Integer list";
         else return "Sort by select, String list";
+    }
+
+    @Override
+    public SortType getSortType() {
+        return this.sortType;
     }
 
 }

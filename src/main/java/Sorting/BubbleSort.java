@@ -4,9 +4,10 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BubbleSort implements Sort {
+public class BubbleSort<E> implements Sort<E> {
 
     boolean isNumeric = false;
+    private SortType sortType = SortType.BubbleSort;
 
     @Override
     public <E> List<E> sorting(final List<E> toSort, Comparator<E> comparator) {
@@ -29,6 +30,11 @@ public class BubbleSort implements Sort {
     public String sortType() {
         if(isNumeric) return "Bubble sort, Integer list";
         else return "Bubble sort, String list";
+    }
+
+    @Override
+    public SortType getSortType() {
+        return this.sortType;
     }
 
 

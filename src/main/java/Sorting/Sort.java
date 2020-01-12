@@ -3,11 +3,13 @@ package Sorting;
 import java.util.Comparator;
 import java.util.List;
 
-public interface Sort {
+public interface Sort<E> {
 
     <E> List<E> sorting(List<E> toSort, Comparator<E> comparator);
 
     String sortType();
+
+    SortType getSortType();
 
 
 
@@ -19,6 +21,12 @@ public interface Sort {
         toSwap.set(indexB1, a2);
     }
 
+    enum SortType{
+        BubbleSort,
+        SelectSort,
+        QuickSort,
+        HybridSort;
+    }
 
 
 

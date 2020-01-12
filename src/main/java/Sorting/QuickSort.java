@@ -4,19 +4,20 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class QuickSort<E> implements Sort {
+public class QuickSort<E> implements Sort<E> {
 
     boolean isNumeric = false;
-    private List<E> quickSortList;
+    private List quickSortList;
+    private SortType sortType = SortType.QuickSort;
 
-    private void quickSort(List<E> listToSort, Comparator comparator){
+    private <E> void quickSort(List<E> listToSort, Comparator<E> comparator){
         if(listToSort.size()>0) {
             List<E> tempSmallerThanPivot = new LinkedList<>();
             List<E> tempEqualToPivot = new LinkedList<>();
             List<E> tempLargerThanPivot = new LinkedList<>();
             boolean isAllTheSame = true;
             for (int i = 0; i < listToSort.size() - 1; i++) {
-                if (!listToSort.get(i).equals(listToSort.get(i + 1))) {
+                if (!listToSort.get(i).equals(listToSort.get(i + 1)) && listToSort.size() <= 1) {
                     isAllTheSame = false;
                     break;
                 }
@@ -43,12 +44,14 @@ public class QuickSort<E> implements Sort {
     }
 
 
+
+
     @Override
-    public List sorting(final List toSort, Comparator comparator) {
+    public <E> List <E> sorting(List<E> toSort, Comparator<E> comparator) {
         if(toSort.get(0) instanceof Integer) this.isNumeric = true; else this.isNumeric = false;
         this.quickSortList = new LinkedList<>();
         quickSort(toSort, comparator);
-        return this.quickSortList;
+        return (List<E>) this.quickSortList;
     }
 
     @Override
@@ -57,6 +60,10 @@ public class QuickSort<E> implements Sort {
         else return "Quick sort, String List";
     }
 
+    @Override
+    public SortType getSortType() {
+        return null;
+    }
 
 
 }

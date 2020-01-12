@@ -62,7 +62,7 @@ public class Shop {
         private long startServingTime= System.nanoTime();;
 
         private Cashier cashier;
-        private Queue<Client> clients;
+        private Lists.Queue<Client> clients;
         private List<Long> waitingTimeList;
         private int numberOfClients;
 
@@ -72,7 +72,7 @@ public class Shop {
 
         public InShop(int numberOfClients) {
             this.numberOfClients = numberOfClients;
-            this.clients = new Queue<>();
+            this.clients = new Lists.Queue<>();
             for (int i = 0; i <= numberOfClients; i++) {
                 clients.add(new Client());
             }

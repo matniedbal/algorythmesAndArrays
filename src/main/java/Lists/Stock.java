@@ -1,3 +1,5 @@
+package Lists;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class Stock<E> {
         Element actualReversed = reverseStock().getTop();
 
         for (int i = 0; i < counter; i++) {
-            System.out.println("NORM VAL: "+actualNormal.value+" REV VAL: "+actualReversed.value+" Stock size: "+counter);
+            System.out.println("NORM VAL: "+actualNormal.value+" REV VAL: "+actualReversed.value+" Lists.Stock size: "+counter);
 
             if(!actualNormal.value.equals(actualReversed.value)) return false;
             actualNormal = actualNormal.previous;
@@ -105,6 +107,14 @@ public class Stock<E> {
         return temp;
     }
 
+    public E getValue() {
+        return (E) top.value;
+    }
+
+    public Element getPrevious() {
+        return top.previous;
+    }
+
     public String toString(){
             String temp = "";
             temp = temp + "[";
@@ -123,8 +133,10 @@ public class Stock<E> {
 
     class Element<E> {
 
-        E value;
-        Element previous;
+        private E value;
+        private Element previous;
+
+
 
         public Element(E value, Element previous) {
             this.value = value;

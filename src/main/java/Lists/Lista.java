@@ -1,3 +1,5 @@
+package Lists;
+
 import java.util.Comparator;
 
 public interface Lista<E> {

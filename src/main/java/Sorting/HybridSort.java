@@ -4,18 +4,19 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HybridSort<E> implements Sort {
+public class HybridSort<E,S> implements Sort<E> {
 
     boolean isNumeric = false;
     private int selectBySort_toHybrid_ArraySize;
-    private Sort sortBySelect;
-    private List<E> hybridSortList;
+    private Sort<E> sortBySelect;
+    private List hybridSortList;
+    private SortType sortType = SortType.HybridSort;
 
     public HybridSort(int selectBySort_toHybrid_ArraySize) {
         this.selectBySort_toHybrid_ArraySize = selectBySort_toHybrid_ArraySize;
     }
 
-    private void hybridSort(List<E> list, Comparator comparator){
+    private <E> void hybridSort(List<E> list, Comparator comparator){
         if(list.size()>0) {
             if (list.size() > this.selectBySort_toHybrid_ArraySize) {
                 List<E> tempSmallerThanPivot = new LinkedList<>();
@@ -49,17 +50,22 @@ public class HybridSort<E> implements Sort {
     }
 
     @Override
-    public List sorting(List toSort, Comparator comparator) {
+    public <E> List<E> sorting(List<E> toSort, Comparator<E> comparator) {
         if(toSort.get(0) instanceof Integer) this.isNumeric = true; else this.isNumeric = false;
         this.sortBySelect = new SortBySelect<>();
         this.hybridSortList = new LinkedList<>();
         hybridSort(toSort, comparator);
-        return this.hybridSortList;
+        return (List<E>) this.hybridSortList;
     }
 
     @Override
     public String sortType() {
         if(isNumeric) return "Hybrid sort with "+this.selectBySort_toHybrid_ArraySize+" sort by select array size, Integer list.";
         else return "Hybrid sort with "+this.selectBySort_toHybrid_ArraySize+" sort by select array size, String list.";
+    }
+
+    @Override
+    public SortType getSortType() {
+        return this.sortType;
     }
 }
