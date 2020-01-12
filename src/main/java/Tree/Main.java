@@ -10,22 +10,33 @@ public class Main {
 //        System.out.println("All left children: "+binnaryTree.getAllLeftChildren());
 
         BSTNodeTree<Integer> binnaryTree = new BSTNodeTree<>(Integer::compareTo);
-        binnaryTree.add(9);
-        binnaryTree.add(1);
-        binnaryTree.add(16);
-        binnaryTree.add(6);
-        binnaryTree.add(19);
-        binnaryTree.add(0);
-        binnaryTree.add(10);
-        binnaryTree.add(3);
-        binnaryTree.add(4);
-        binnaryTree.add(5);
-        binnaryTree.add(6);
-        binnaryTree.add(8);
-        binnaryTree.add(11);
-        binnaryTree.add(12);
-        System.out.println("find: "+binnaryTree.findValue(12)+" result found in "+binnaryTree.getTries()+" tries");
-        System.out.println("Min value: "+binnaryTree.getMinValue()+", Max value: "+binnaryTree.getMaxValue());
+        int listLength = 70;
+        int numberRenge = 70;
+        int numbToFind = 8;
+        for(int i = 0; i < listLength; i++){
+            binnaryTree.add((int) (Math.random()*numberRenge));
+        }
+        System.out.println("find: "+binnaryTree.findValue(numbToFind)+" result found in "+binnaryTree.getTries()+" tries");
+        System.out.println("Min value: "+binnaryTree.getMin().getValue()+" result found in "+binnaryTree.getTries()+" tries"+" \nMax value: "+binnaryTree.getMax().getValue()+" result found in "+binnaryTree.getTries()+" tries");
+            System.out.print(binnaryTree.showChildren(numbToFind));
+
+
+        System.out.println();
+        binnaryTree.postOrder();
+        binnaryTree.preOrder();
+        binnaryTree.inOrder();
+        binnaryTree.inOrderReversed();
+        System.out.print("Leaves: ");
+        binnaryTree.leavesOrder();
+        System.out.println("Sum of all: "+binnaryTree.sum());
+        System.out.print("One child owners: ");
+        binnaryTree.oneChildOrder();
+        System.out.println("Size, my version: "+binnaryTree.topsCount());
+        System.out.println("Size: "+ binnaryTree.size());
+        System.out.println("Size Atomic: "+ binnaryTree.getSizeAtomic());
+        System.out.println("Height: "+ binnaryTree.height());
+
+
 
     }
 }
