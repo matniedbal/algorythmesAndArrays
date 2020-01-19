@@ -8,7 +8,7 @@ public class Main {
         int matrixField = 10, numberOfBombs = 10;
         try {
             if(numberOfBombs > matrixField * matrixField) throw new MoreBombsThanFieldsException();
-            matrix = new Matrix(new Field(false,false,false,null,null,null,null,null,null,null,null),matrixField,numberOfBombs);
+            matrix = new Matrix(3,5,matrixField,numberOfBombs);
             matrix.print();
 
             int counter = 0;
