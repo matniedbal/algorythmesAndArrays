@@ -6,6 +6,7 @@ import java.util.List;
 
 public class HybridSort<E,S> implements Sort<E> {
 
+    private long numberOfsearches;
     boolean isNumeric = false;
     private int selectBySort_toHybrid_ArraySize;
     private Sort<E> sortBySelect;
@@ -51,6 +52,7 @@ public class HybridSort<E,S> implements Sort<E> {
 
     @Override
     public <E> List<E> sorting(List<E> toSort, Comparator<E> comparator) {
+        numberOfsearches = 0;
         if(toSort.get(0) instanceof Integer) this.isNumeric = true; else this.isNumeric = false;
         this.sortBySelect = new SortBySelect<>();
         this.hybridSortList = new LinkedList<>();
