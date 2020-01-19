@@ -103,25 +103,22 @@ public class Matrix {
         }
     }
 
-    public boolean openField(int x, int y){
+    public void openField(int x, int y){
         if(x>=0 && x < matrix.length && y>=0 && y < matrix[x].length && !matrix[x][y].isBomb() && !matrix[x][y].isOpen){
             matrix[x][y].setOpen(true);
                 if (x > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x-1,y);
                 if (y > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x,y-1);
                 if (x < matrix.length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x+1,y);
                 if (y < matrix[x].length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x, y+1);
-                return true;
         }
-        return false;
     }
 
-    public boolean openAll(){
+    public void openAll(){
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j].isOpen=true;
             }
         }
-        return false;
     }
 
     private void generateMatrix(){
