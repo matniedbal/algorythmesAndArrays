@@ -4,20 +4,31 @@ public class Menus {
 
     public static void menu1(){
 
-        System.out.println("'A'-odkryj pole");
-        System.out.println("'S'-oznacz bombe");
-        System.out.println("'Q'-wyjdź z gry");
+        System.out.println("'A'- open a field");
+        System.out.println("'S'- mark a bomb");
+        System.out.println("'Q'- quit the game");
     }
 
     public static void menu2(boolean isItRow){
         if(isItRow)
-        System.out.println("podaj rząd: ");
+        System.out.println("Row: ");
         else
-            System.out.println("podaj kolumnę: ");
+            System.out.println("Column: ");
     }
 
     public static void title(){
         System.out.println("SUPER SAPER");
     }
 
+    public static void exceptionOutOfBounds(){
+        System.out.println("Wrong field, choose the correct one!");
+    }
+
+    public static void exceptionWrongFormat(){
+        System.out.println("Wrong number format, try again!");
+    }
+
+    public static void wrongType() {
+        System.out.println("Wrong type, try again!");
+    }
 }

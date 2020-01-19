@@ -7,10 +7,10 @@ public class Main {
 
         int matrixField = 10, numberOfBombs = 5;
         try {
-            if(numberOfBombs > matrixField * matrixField) throw new MoreBombsThanFieldsException();
+            if(numberOfBombs > matrixField * matrixField) throw new CustomException();
             Game game = new Game(numberOfBombs, matrixField);
 
-        } catch (MoreBombsThanFieldsException e) {
+        } catch (CustomException e) {
             System.out.println("Too many bombs!!! World has exploded");
         }
 

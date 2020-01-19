@@ -9,7 +9,7 @@ public class Matrix {
     private int xFirst;
     private int yFirst;
 
-    public Matrix(int xFirst, int yFirst, int n, int numberOfBombs) throws MoreBombsThanFieldsException {
+    public Matrix(int xFirst, int yFirst, int n, int numberOfBombs) throws CustomException {
         this.xFirst = xFirst;
         this.yFirst = yFirst;
         this.numberOfBombs = numberOfBombs;
@@ -130,31 +130,30 @@ public class Matrix {
             for(int j = 0; j < matrix[i].length; j++){
                 if(i==0) {
                     if(j == 0){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,null,null,null,null,matrix[i][j+1],null,matrix[i+1][j],matrix[i+1][j+1]);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else if(j == matrix[i].length-1){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,null,null,null,matrix[i][j-1],null,matrix[i+1][j-1],matrix[i+1][j],null);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else{
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,null,null,null,matrix[i][j-1],matrix[i][j+1],matrix[i+1][j-1],matrix[i+1][j],matrix[i+1][j+1]);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }
                 }else if(i>0 && i<matrix.length-1) {
                     if(j == 0){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,null,matrix[i-1][j],matrix[i-1][j+1],null,matrix[i][j+1],null,matrix[i+1][j],matrix[i+1][j+1]);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else if(j == matrix[i].length-1){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,matrix[i-1][j-1],matrix[i-1][j],null,matrix[i][j-1],null,matrix[i+1][j-1],matrix[i+1][j],null);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else{
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,matrix[i-1][j-1],matrix[i-1][j],matrix[i-1][j+1],matrix[i][j-1],matrix[i][j+1],matrix[i+1][j-1],matrix[i+1][j],matrix[i+1][j+1]);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }
                 }else if(i == matrix.length-1){
                     if(j == 0){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,null,matrix[i-1][j],matrix[i-1][j+1],null,matrix[i][j+1],null,null,null);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else if(j == matrix[i].length-1){
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,matrix[i-1][j-1],matrix[i-1][j],null,matrix[i][j-1],null,null,null,null);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }else{
-                        matrix[i][j] = new Field(this.bombFields[counter],false,false,matrix[i-1][j-1],matrix[i-1][j],matrix[i-1][j+1],matrix[i][j-1],matrix[i][j+1],null,null,null);
+                        matrix[i][j] = new Field(this.bombFields[counter],false,false);
                     }
                 }
                 counter ++;
-                matrix[i][j].setiD(counter);
             }
         }
     }
