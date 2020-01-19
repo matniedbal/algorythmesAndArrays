@@ -53,6 +53,7 @@ public class Game {
                     x = key.nextInt();
                     Menus.menu2(false);
                     y = key.nextInt();
+                    if(matrix.getMatrix()[x][y].isOpen) throw new CustomException();
                     matrix.openField(x, y);
                     if(matrix.getMatrix()[x][y].isBomb()) {
                         gameOver = true;
@@ -64,6 +65,8 @@ public class Game {
                 }catch(ArrayIndexOutOfBoundsException ex2){
                     Menus.exceptionOutOfBounds();
                     continue;
+                }catch(CustomException ex){
+                    Menus.exceptionAlreadyOpen();
                 }
 
             } else if (choice.toUpperCase().equals("S")) {
@@ -73,6 +76,7 @@ public class Game {
                      x = key.nextInt();
                     Menus.menu2(false);
                      y = key.nextInt();
+                     if(matrix.getMatrix()[x][y].isOpen) throw new CustomException();
                     matrix.getMatrix()[x][y].setChecked(true);
                 }catch(InputMismatchException ex){
                     Menus.exceptionWrongFormat();
@@ -80,6 +84,8 @@ public class Game {
                 }catch(ArrayIndexOutOfBoundsException ex2){
                     Menus.exceptionOutOfBounds();
                     continue;
+                }catch(CustomException ex){
+                    Menus.exceptionAlreadyOpen();
                 }
             } else if (choice.toUpperCase().equals("Q")) {
                 break;

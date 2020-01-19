@@ -31,4 +31,8 @@ public class Menus {
     public static void wrongType() {
         System.out.println("Wrong type, try again!");
     }
+
+    public static void exceptionAlreadyOpen() {
+        System.out.println("This field is already open! Try another one!");
+    }
 }
