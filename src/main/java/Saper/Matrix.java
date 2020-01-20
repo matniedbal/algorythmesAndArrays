@@ -103,13 +103,40 @@ public class Matrix {
         }
     }
 
+    private void openSurround(int x, int y, char a){
+        int n = 1;
+        if (x > n && !matrix[x-n][y].isBomb() && matrix[x-n+1][y].isOpen) {
+            if(!matrix[x-n][y].isOpen && matrix[x-n][y].numberOfBombsInSurround>0) matrix[x-n][y].setOpen(true);
+        }
+        if (y > 1 && !matrix[x][y-n].isBomb() && matrix[x][y-n+1].isOpen) {
+            if(!matrix[x][y-n].isOpen && matrix[x][y-n].numberOfBombsInSurround>0) matrix[x][y-n].setOpen(true);
+        }
+        if (x < matrix.length-n && !matrix[x+n][y].isBomb() && matrix[x+n-1][y].isOpen) {
+            if(!matrix[x+n][y].isOpen && matrix[x+n][y].numberOfBombsInSurround>0) matrix[x+n][y].setOpen(true);
+        }
+        if (y < matrix[x].length-n && !matrix[x][y+n].isBomb() && matrix[x][y+n-1].isOpen) {
+            if(!matrix[x][y+n].isOpen && matrix[x][y+n].numberOfBombsInSurround>0) matrix[x][y+n].setOpen(true);
+        }
+    }
+
     public void openField(int x, int y){
         if(x>=0 && x < matrix.length && y>=0 && y < matrix[x].length && !matrix[x][y].isBomb() && !matrix[x][y].isOpen){
             matrix[x][y].setOpen(true);
-                if (x > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x-1,y);
-                if (y > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x,y-1);
-                if (x < matrix.length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x+1,y);
-                if (y < matrix[x].length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) openField(x, y+1);
+            openSurround(x,y+1,'d');
+            openSurround(x,y,'u');
+            openSurround(x,y-1,'u');
+                if (x > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) {
+                    openField(x-1,y);
+                }
+                if (y > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) {
+                    openField(x,y-1);
+                }
+                if (x < matrix.length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) {
+                    openField(x+1,y);
+                }
+                if (y < matrix[x].length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) {
+                    openField(x, y+1);
+                }
         }
     }
 

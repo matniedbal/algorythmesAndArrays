@@ -86,7 +86,7 @@ public class Game {
                 }
             } else if (choice.toUpperCase().equals("Q")) {
                 break;
-            }
+            } else Menus.wrongType();
             matrix.print();
         }while(matrix.getNumberOfClosedFields() > this.numberOfBombs);
         if(gameOver) {
