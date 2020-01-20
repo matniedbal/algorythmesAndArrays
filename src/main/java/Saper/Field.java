@@ -31,14 +31,15 @@ public class Field {
 
     public String toString(){
         if(!this.isOpen) {
-            if(!this.isChecked) return "#";
+            if(!this.isChecked) return "\u25A1";
             else return "X";
         }
         else{
-            if(this.isBomb && !this.isChecked) return "@";
-            else if(this.isBomb && this.isChecked) return "*";
+            if(this.isBomb && !this.isChecked) return "\u25CF";
+            else if(this.isBomb && this.isChecked) return "\u25CB";
             else{
-                return String.valueOf(numberOfBombsInSurround);
+                if(numberOfBombsInSurround==0) return ".";
+                else return String.valueOf(numberOfBombsInSurround);
             }
         }
     }

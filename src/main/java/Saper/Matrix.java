@@ -191,7 +191,7 @@ public class Matrix {
             for(int f = 1; f <= 3-String.valueOf(i).length()-1; f++) System.out.print(" ");
             System.out.print(" |");
             for(int j = 0; j < numberOfFields; j++){
-                System.out.print(" # ");
+                System.out.print(" \u25A1 ");
             }
             System.out.println("");
         }

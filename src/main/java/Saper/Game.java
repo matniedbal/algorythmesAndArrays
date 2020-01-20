@@ -22,6 +22,7 @@ public class Game {
         Scanner key = new Scanner(System.in);
         Matrix.printStaticMatrix(this.numberOfFields);
         try {
+
             int x,y;
             Menus.menu2(true);
             x = key.nextInt();
@@ -45,7 +46,7 @@ public class Game {
         Scanner key = new Scanner(System.in);
         do {
             Menus.menu1();
-            String choice = key.nextLine();
+            String choice = key.next();
             if (choice.toUpperCase().equals("A")) {
                 try {
                     int x, y;
@@ -61,10 +62,8 @@ public class Game {
                     }
                 }catch(InputMismatchException ex){
                     Menus.exceptionWrongFormat();
-                    continue;
                 }catch(ArrayIndexOutOfBoundsException ex2){
                     Menus.exceptionOutOfBounds();
-                    continue;
                 }catch(CustomException ex){
                     Menus.exceptionAlreadyOpen();
                 }
@@ -80,16 +79,14 @@ public class Game {
                     matrix.getMatrix()[x][y].setChecked(true);
                 }catch(InputMismatchException ex){
                     Menus.exceptionWrongFormat();
-                    continue;
                 }catch(ArrayIndexOutOfBoundsException ex2){
                     Menus.exceptionOutOfBounds();
-                    continue;
                 }catch(CustomException ex){
                     Menus.exceptionAlreadyOpen();
                 }
             } else if (choice.toUpperCase().equals("Q")) {
                 break;
-            } else Menus.wrongType();
+            }
             matrix.print();
         }while(matrix.getNumberOfClosedFields() > this.numberOfBombs);
         if(gameOver) {
