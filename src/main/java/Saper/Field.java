@@ -6,11 +6,17 @@ public class Field {
     private boolean isChecked;
     boolean isOpen;
     int numberOfBombsInSurround;
+    boolean isBlownBomb;
 
     public Field(boolean isBomb,boolean isChecked, boolean isOpen) {
         this.isBomb = isBomb;
         this.isChecked = isChecked;
         this.isOpen = isOpen;
+        this.isBlownBomb = false;
+    }
+
+    public void setBlownBomb(boolean blownBomb) {
+        isBlownBomb = blownBomb;
     }
 
     public boolean isBomb() {
@@ -35,8 +41,9 @@ public class Field {
             else return "X";
         }
         else{
-            if(this.isBomb && !this.isChecked) return "\u25CF";
-            else if(this.isBomb && this.isChecked) return "\u25CB";
+            if(this.isBomb && !this.isChecked && !this.isBlownBomb) return "\u25CF";
+            else if(this.isBomb && this.isChecked && !this.isBlownBomb) return "\u25CB";
+            else if(this.isBomb && !this.isChecked && this.isBlownBomb) return "\u2600";
             else{
                 if(numberOfBombsInSurround==0) return ".";
                 else return String.valueOf(numberOfBombsInSurround);

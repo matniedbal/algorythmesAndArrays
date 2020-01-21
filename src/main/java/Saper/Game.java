@@ -35,7 +35,8 @@ public class Game {
         }catch(InputMismatchException ex){
             Menus.exceptionWrongFormat();
             startGame();
-        }catch(ArrayIndexOutOfBoundsException ex2){
+        }
+        catch(ArrayIndexOutOfBoundsException ex2){
             Menus.exceptionOutOfBounds();
             startGame();
         }
@@ -58,6 +59,7 @@ public class Game {
                     matrix.openField(x, y);
                     if(matrix.getMatrix()[x][y].isBomb()) {
                         gameOver = true;
+                        matrix.getMatrix()[x][y].setBlownBomb(true);
                         break;
                     }
                 }catch(InputMismatchException ex){

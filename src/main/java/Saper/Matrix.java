@@ -14,7 +14,10 @@ public class Matrix {
         this.yFirst = yFirst;
         this.numberOfBombs = numberOfBombs;
         this.numberOfFields = n * n;
-            this.matrix = new Field[n][n];
+            this.matrix = new Field[n][];
+            for(int i = 0; i < n ; i++){
+                this.matrix = new Field[i][n-1];
+            }
             bombFieldsArr();
             generateMatrix();
             setNeighours();
@@ -103,40 +106,17 @@ public class Matrix {
         }
     }
 
-    private void openSurround(int x, int y, char a){
-        int n = 1;
-        if (x > n && !matrix[x-n][y].isBomb() && matrix[x-n+1][y].isOpen) {
-            if(!matrix[x-n][y].isOpen && matrix[x-n][y].numberOfBombsInSurround>0) matrix[x-n][y].setOpen(true);
-        }
-        if (y > 1 && !matrix[x][y-n].isBomb() && matrix[x][y-n+1].isOpen) {
-            if(!matrix[x][y-n].isOpen && matrix[x][y-n].numberOfBombsInSurround>0) matrix[x][y-n].setOpen(true);
-        }
-        if (x < matrix.length-n && !matrix[x+n][y].isBomb() && matrix[x+n-1][y].isOpen) {
-            if(!matrix[x+n][y].isOpen && matrix[x+n][y].numberOfBombsInSurround>0) matrix[x+n][y].setOpen(true);
-        }
-        if (y < matrix[x].length-n && !matrix[x][y+n].isBomb() && matrix[x][y+n-1].isOpen) {
-            if(!matrix[x][y+n].isOpen && matrix[x][y+n].numberOfBombsInSurround>0) matrix[x][y+n].setOpen(true);
-        }
-    }
-
     public void openField(int x, int y){
         if(x>=0 && x < matrix.length && y>=0 && y < matrix[x].length && !matrix[x][y].isBomb() && !matrix[x][y].isOpen){
             matrix[x][y].setOpen(true);
-            openSurround(x,y+1,'d');
-            openSurround(x,y,'u');
-            openSurround(x,y-1,'u');
-                if (x > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) {
-                    openField(x-1,y);
-                }
-                if (y > 0 && matrix[x][y].numberOfBombsInSurround == 0 ) {
-                    openField(x,y-1);
-                }
-                if (x < matrix.length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) {
-                    openField(x+1,y);
-                }
-                if (y < matrix[x].length-1 && matrix[x][y].numberOfBombsInSurround == 0 ) {
-                    openField(x, y+1);
-                }
+                if (x > 0 && matrix[x][y].numberOfBombsInSurround == 0 )openField(x-1,y);
+                if (x > 0 && y > 0 && matrix[x][y].numberOfBombsInSurround == 0 )openField(x-1,y-1);
+                if (x > 0 && y < matrix[x].length && matrix[x][y].numberOfBombsInSurround == 0 )openField(x-1,y+1);
+                if (y > 0 && matrix[x][y].numberOfBombsInSurround == 0 )openField(x,y-1);
+                if (y < matrix[x].length && matrix[x][y].numberOfBombsInSurround == 0 )openField(x, y+1);
+                if (x < matrix.length && y > 0 && matrix[x][y].numberOfBombsInSurround == 0 )openField(x+1,y-1);
+                if (x < matrix.length && matrix[x][y].numberOfBombsInSurround == 0 )openField(x+1,y);
+                if (x < matrix.length && y < matrix[x].length && matrix[x][y].numberOfBombsInSurround == 0 )openField(x+1,y+1);
         }
     }
 
@@ -205,7 +185,7 @@ public class Matrix {
 
     public static void printStaticMatrix(int numberOfFields){
         System.out.print("   ");
-        for(int j = 0; j < numberOfFields; j++){
+        for(int j = 0; j < numberOfFields-1; j++){
             for(int f = 1; f <= 3-String.valueOf(j).length(); f++) System.out.print(" ");
             System.out.print(j);
         }
@@ -213,11 +193,11 @@ public class Matrix {
         for(int j = 0; j < numberOfFields*4; j++){
             System.out.print("-");}
         System.out.println();
-        for(int i = 0 ; i < numberOfFields; i++){
+        for(int i = 0 ; i < numberOfFields-1; i++){
             System.out.print(i);
             for(int f = 1; f <= 3-String.valueOf(i).length()-1; f++) System.out.print(" ");
             System.out.print(" |");
-            for(int j = 0; j < numberOfFields; j++){
+            for(int j = 0; j < numberOfFields-1; j++){
                 System.out.print(" \u25A1 ");
             }
             System.out.println("");
